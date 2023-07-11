@@ -6,7 +6,9 @@ const sortNumsA = (someNums) => {
 };
 
 // sort numbers in descending order
-const sortNumsD = () => {};
+const sortNumsD = (someNums) => {
+  return someNums.sort((a, b) => b - a);
+};
 
 // sort words in ascending order case sensitive
 const sortWordsA = () => {};
