@@ -20,7 +20,9 @@ const sortWordsA = (someWords) => {
 };
 
 // sort words in descending order case insensitive
-const sortWordsD = () => {};
+const sortWordsD = (someWords) => {
+  return someWords.sort((a, b) => (a.toLowerCase() > b.toLowerCase() ? -1 : 1));
+};
 
 // sort products by name, ascending order case insensitive
 const sortProductNamesA = () => {};
