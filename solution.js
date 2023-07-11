@@ -58,8 +58,15 @@ const sortProducsPriceNameA = (someProducts) => {
   });
 };
 
-// sort catArt by designed by
-const catArtSortDesginedByA = () => {};
+// sort catArt by designed by. ascending order
+const catArtSortDesginedByA = (catArt) => {
+  // return catArt.sort((a, b) => (a.designedBy.toUpperCase() > b.designedBy.toUpperCase() ? -1 : 1));
+  return catArt.sort((a, b) => {
+    if (a.designedBy < b.designedBy) return -1;
+    if (a.designedBy > b.designedBy) return 1;
+    return 0;
+  });
+};
 
 // sort catArt by price
 const catArtSortByPriceA = () => {};
