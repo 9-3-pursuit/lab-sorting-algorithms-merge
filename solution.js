@@ -25,7 +25,13 @@ const sortWordsD = (someWords) => {
 };
 
 // sort products by name, ascending order case insensitive
-const sortProductNamesA = () => {};
+const sortProductNamesA = (someProducts) => {
+  return someProducts.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
+};
 
 // sort products by price, ascending order
 const sortProductPriceA = () => {};
