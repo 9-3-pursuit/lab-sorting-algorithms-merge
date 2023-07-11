@@ -11,7 +11,13 @@ const sortNumsD = (someNums) => {
 };
 
 // sort words in ascending order case sensitive
-const sortWordsA = () => {};
+const sortWordsA = (someWords) => {
+  return someWords.sort((a, b) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  });
+};
 
 // sort words in descending order case insensitive
 const sortWordsD = () => {};
