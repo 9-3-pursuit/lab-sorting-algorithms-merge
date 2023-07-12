@@ -1,4 +1,10 @@
-const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
+const {
+  catArt,
+  someNums,
+  someNums2,
+  someProducts,
+  someWords,
+} = require("./data/data.js");
 
 // sort numbers in ascending order
 const sortNumsA = (someNums) => {
@@ -88,7 +94,7 @@ const catArtSortByPriceA = (priceArt) => {
       // set current & prevevious price conditons
       let price1 = Number(priceArt[i].price);
       let price2 = Number(priceArt[i + 1].price);
-      
+
       // checking if it's a number or not while checking for current price & next price in the list
       if (isNaN(price1)) {
         price1 = Number(10 * priceArt[i].price.slice(-1));
@@ -96,7 +102,7 @@ const catArtSortByPriceA = (priceArt) => {
       if (isNaN(price2)) {
         price2 = Number(10 * priceArt[i + 1].price.slice(-1));
       }
-      
+
       // this would swap prices into the correct order based off of if the condition is true
       if (price1 > price2) {
         sorted = true;
@@ -117,7 +123,43 @@ const catArtSortByPriceA = (priceArt) => {
 // or try to implement merge sort
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
-const mySortFunction = () => {};
+
+const mySortFunction = () => {
+  const merge = (someNums, someNums2) => {
+    const sortedNumsArray = [];
+    while (someNums.length && someNums2.length) {
+      if (someNums[0] < someNums2[0]) {
+        sortedNumsArray.push(someNums.shift());
+      } else {
+        sortedNumsArray.push(someNums2.shift());
+      }
+    }
+    return [...sortedNumsArray, ...someNums, ...someNums2];
+  };
+  console.log("merge func:", merge(someNums, someNums2)); 
+  // [ 1, 2, 3,  4, 5, 6, 7, 8, 9, 0, 10, 9, 8, 7, 6, 5, 4,  3, 2, 1, 0]
+  
+  const mergeSort = (numsArr) => {
+    const half = numsArr.length / 2
+    if(numsArr.length <= 1){
+      return numsArr;
+    }
+    const someNums = numsArr.splice(0,half)
+    const someNums2 = numsArr
+    console.log("someNums:",someNums, "someNums2:", someNums2) 
+    return merge(mergeSort(someNums), mergeSort(someNums2))
+    
+  }
+  console.log(mergeSort(someNums,someNums2))
+  
+  const numsArr2 = [5, 4, 3 , 2, 1]
+  console.log(mergeSort(numsArr2)) //  [ 1, 2, 3, 4, 5 ]
+  
+  
+};
+
+
+
 
 module.exports = {
   sortNumsA,
@@ -130,5 +172,6 @@ module.exports = {
   sortProducsPriceNameA,
   catArtSortDesginedByA,
   catArtSortByPriceA,
-  mySortFunction,
+  mySortFunction
+ 
 };

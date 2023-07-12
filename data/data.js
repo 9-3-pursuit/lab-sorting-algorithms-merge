@@ -1,5 +1,7 @@
 const someNums = [7, 10, 9, 4, 0, 6, 1, 8, 3, 2, 5];
 
+const someNums2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
 const someWords = [
   "The",
   "quick",
@@ -138,4 +140,5 @@ module.exports = {
   someNums,
   someProducts,
   someWords,
+  someNums2
 };
