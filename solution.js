@@ -1,19 +1,74 @@
 const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
 
+
 // sort numbers in ascending order
-const sortNumsA = () => {};
+const sortNumsA = (nums) => {
+  for (let i=0; i < nums.length; i++){
+    for(let j=0; j <nums.length; j++){
+      if(nums[j]>nums[j+1]){
+        let temp = nums[j];
+        nums[j] = nums[j+1];
+        nums[j+1] = temp
+      }
+    }
+  }
+  return nums;
+};
 
 // sort numbers in descending order
-const sortNumsD = () => {};
+const sortNumsD = (nums) => {
+  for (let i=0; i < nums.length; i++){
+    for(let j=0; j <nums.length; j++){
+      if(nums[j]<nums[j+1]){
+        let temp = nums[j];
+        nums[j] = nums[j+1];
+        nums[j+1] = temp
+      }
+    }
+  }
+  return nums;
+
+};
+
 
 // sort words in ascending order case sensitive
-const sortWordsA = () => {};
+const sortWordsA = (words) => {
+  for (let i=0; i < words.length; i++){
+    for(let j=0; j <words.length; j++){
+      if(words[j]>words[j+1]){
+        let temp = words[j];
+        words[j] = words[j+1];
+        words[j+1] = temp
+      }
+    }
+  }
+  return words;
+};
+
 
 // sort words in descending order case insensitive
-const sortWordsD = () => {};
+const sortWordsD = (words) => {
+  for (let i=0; i < words.length-1; i++){
+    for(let j=0; j <words.length-1; j++){
+      if(words[j].localeCompare(words[j+1])<0){
+        let temp = words[j];
+        words[j] = words[j+1];
+        words[j+1] = temp
+      }
+    }
+  }
+  return words;
+};
+
 
 // sort products by name, ascending order case insensitive
-const sortProductNamesA = () => {};
+const sortProductNamesA = (someProducts) => {
+
+};
+
+console.log(sortWordsD(someWords))
+
+
 
 // sort products by price, ascending order
 const sortProductPriceA = () => {};
