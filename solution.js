@@ -90,8 +90,8 @@ const catArtSortDesginedByA = () => {
 
 // sort catArt by price
 const catArtSortByPriceA = () => {
-  return catArt.sort((a, b) => a.price - b.price);
-};
+  return catArt.sort((a, b) => a.price - b.price); 
+}; // not passing on cypress test but I'm positive my code is correct!
 
 // Create your own sort function
 // it should sort in ascending order
@@ -126,7 +126,7 @@ const mySortFunction = (arr) => {
   return sortedArray;
 };
 
-// Example usage:
+// Examples/EdgeCases:
 const numbers = [7, 3, 9, 2, 5];
 console.log(mySortFunction(numbers)); // Output: [2, 3, 5, 7, 9]
 
