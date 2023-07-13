@@ -81,10 +81,20 @@ const sortWordsD = (someWords) => {
   const left = someWords.slice(0, half);
   const right = someWords.slice(half);
 
-  return mergeWordsDescending(sortWordsD(left), sortWordsD(right));
+  return mergeWordsDescending(sortWordsD(right), sortWordsD(left));
 };
 
-function mergeWordsDescending(left, right) {}
+function mergeWordsDescending(right, left) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (right[0].toLowerCase() > left[0].toLowerCase()) {
+      sortedArray.push(right.shift());
+    } else {
+      sortedArray.push(left.shift());
+    }
+  }
+  return [...sortedArray, ...right, ...left];
+}
 
 // sort products by name, ascending order case insensitive
 const sortProductNamesA = () => {};
