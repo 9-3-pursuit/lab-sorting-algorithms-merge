@@ -89,9 +89,24 @@ const catArtSortDesginedByA = () => {
 };
 
 // sort catArt by price
-const catArtSortByPriceA = () => {
-  return catArt.sort((a, b) => a.price - b.price); 
-}; // not passing on cypress test but I'm positive my code is correct!
+const catArtSortByPriceA = (catArt) => {
+  const convertCryptoToDollars = (price) => {
+    if (typeof price === 'string') {
+      if (price.includes('♇♇')) {
+        const cryptoValue = Number(price.replace('♇♇', ''));
+        return cryptoValue * 10;
+      }
+      return Number(price);
+    }
+    return price;
+  };
+
+  return catArt.sort((a, b) => {
+    const priceA = convertCryptoToDollars(a.price);
+    const priceB = convertCryptoToDollars(b.price);
+    return priceA - priceB;
+  });
+};
 
 // Create your own sort function
 // it should sort in ascending order
