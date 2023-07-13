@@ -101,7 +101,38 @@ const catArtSortByPriceA = () => {
 // or try to implement merge sort
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
-const mySortFunction = () => {};
+const mySortFunction = (arr) => {
+  // Check if the input is an array
+  if (!Array.isArray(arr)) {
+    throw new Error('Input is not an array');
+  }
+
+  // Clone/Create a copy of the array using the spread operator to avoid modifying the original array
+  const sortedArray = [...arr];
+
+  // Perform bubble sort
+  const length = sortedArray.length;
+  for (let i = 0; i < length - 1; i++) {
+    for (let j = 0; j < length - 1 - i; j++) {
+      // Compare next/adjacent elements and swap if necessary
+      if (sortedArray[j] > sortedArray[j + 1]) {
+        const temp = sortedArray[j];
+        sortedArray[j] = sortedArray[j + 1];
+        sortedArray[j + 1] = temp;
+      }
+    }
+  }
+
+  return sortedArray;
+};
+
+// Example usage:
+const numbers = [7, 3, 9, 2, 5];
+console.log(mySortFunction(numbers)); // Output: [2, 3, 5, 7, 9]
+
+const words = ['apple', 'cat', 'banana', 'dog'];
+console.log(mySortFunction(words)); // Output: ['apple', 'banana', 'cat', 'dog']
+
 
 module.exports = {
   sortNumsA,
