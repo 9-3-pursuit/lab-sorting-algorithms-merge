@@ -150,7 +150,7 @@ const mySortFunction = () => {
     return merge(mergeSort(someNums), mergeSort(someNums2))
     
   }
-  console.log(mergeSort(someNums,someNums2))
+  console.log(mergeSort(someNums,mergeSortsomeNums2))
   
   const numsArr2 = [5, 4, 3 , 2, 1]
   console.log(mergeSort(numsArr2)) //  [ 1, 2, 3, 4, 5 ]
