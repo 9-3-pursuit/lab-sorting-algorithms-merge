@@ -2,12 +2,51 @@ const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
 
 // sort numbers in ascending order
 const sortNumsA = (someNums) => {
-  return someNums.sort((a, b) => a - b)
+  if (someNums.length <= 1) {
+    return someNums;
+  }
+
+  const half = Math.floor(someNums.length / 2);
+  const left = someNums.slice(0, half); // making a new arr w/ the first half of our original array
+  const right = someNums.slice(half); // the rest of our arr
+
+  return mergeAscending(sortNumsA(left), sortNumsA(right));
 };
 
-// sort numbers in descending order
-const sortNumsD = () => {};
+function mergeAscending(left, right) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      sortedArray.push(left.shift());
+    } else {
+      sortedArray.push(right.shift());
+    }
+  }
+  return [...sortedArray, ...left, ...right];
+}
 
+// sort numbers in descending order
+const sortNumsD = (someNums) => { 
+  if (someNums.length <= 1) {
+    return someNums;
+  }
+  const half = Math.floor(someNums.length / 2);
+  const left = someNums.slice(0, half); // making a new arr w/ the first half of our original array
+  const right = someNums.slice(half); // the rest of our arr
+  return mergeDescending(sortNumsD(right), sortNumsD(left));
+};
+
+function mergeDescending(right, left) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (right[0] > left[0]) {
+      sortedArray.push(right.shift());
+    } else {
+      sortedArray.push(left.shift());
+    }
+  }
+  return [...sortedArray, ...right, ...left];
+}
 // sort words in ascending order case sensitive
 const sortWordsA = () => {};
 
