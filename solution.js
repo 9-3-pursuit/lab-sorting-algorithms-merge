@@ -47,13 +47,45 @@ const sortWordsD = (words) => {
 };
 
 // sort products by name, ascending order case insensitive
-const sortProductNamesA = () => {};
+const sortProductNamesA = (products) => {
+   products.sort((a, b) => {
+    a.name = a.name.toLowerCase();
+    b.name = b.name.toLowerCase();
+    if (a.name > b.name){
+      return 1;
+    }
+    else if (a.name < b.name){
+      return -1;
+    }
+    return 0
+   })
+   return products;
+};
 
 // sort products by price, ascending order
-const sortProductPriceA = () => {};
+const sortProductPriceA = (products) => {
+  products.sort((a, b)=> {
+    if(a.price >b.price){
+      return 1;
+    }else if(a.price < b.price){
+    return -1;
+  }return 0;
+  })
+  return products;
+};
 
 // sort products by price, descending order
-const sortProductPriceD = () => {};
+const sortProductPriceD = (products) => {
+  products.sort((a, b)=> {
+    if(a.price > b.price){
+      return -1
+    }else if (a.price < b.price){
+      return 1
+    }
+    return 0
+  })
+  return products;
+};
 
 // sort products by price, then by name, ascending order
 const sortProducsPriceNameA = () => {};
