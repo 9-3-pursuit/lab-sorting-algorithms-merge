@@ -97,18 +97,29 @@ const catArtSortDesginedByA = (catArt) => {
 
 // sort catArt by price
 const catArtSortByPriceA = (catArt) => {
-  return catArt.sort((a, b) =>  {
-  let CatArtA = a.price;
-  let CatArtB = b.price;
+  const convertCryptoToDollars = (price) => {
+    if (typeof price === 'string') {
+      if (price.includes('♇♇')) {
+        const cryptoValue = Number(price.replace('♇♇', ''));
+        return cryptoValue * 10;
+      }
+      return Number(price);
+    }
+    return price;
+  };
 
-  if(CatArtA > CatArtB) return 1;
-  if(CatArtA < CatArtB) return -1; 
-
-  
-  return 0;
- 
-  })
+  return catArt.sort((a, b) => {
+    const priceA = convertCryptoToDollars(a.price);
+    const priceB = convertCryptoToDollars(b.price);
+    return priceA - priceB;
+  });
 };
+
+
+
+
+
+
 
 // Create your own sort function
 // it should sort in ascending order
