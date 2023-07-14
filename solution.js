@@ -97,11 +97,53 @@ function mergeWordsDescending(right, left) {
 }
 
 // sort products by name, ascending order case insensitive
-const sortProductNamesA = () => {};
+const sortProductNamesA = (someProducts) => {
+  if (someProducts.length <= 1) {
+    return someProducts;
+  }
+  const half = Math.floor(someProducts.length / 2);
+  const left = someProducts.slice(0, half);
+  const right = someProducts.slice(half);
+  return WordsAscending(sortProductNamesA(left), sortProductNamesA(right));
+};
+
+function WordsAscending(left, right) {
+  const sortedArray = [];
+
+  while (left.length && right.length) {
+    if (left[0].name < right[0].name) {
+      sortedArray.push(left.shift());
+    } else {
+      sortedArray.push(right.shift());
+    }
+  }
+  return [...sortedArray, ...left, ...right];
+}
 
 // sort products by price, ascending order
-const sortProductPriceA = () => {};
+const sortProductPriceA = (someProducts) => {
+  if (someProducts.length <= 1) {
+    return someProducts;
+  }
+  const half = Math.floor(someProducts.length / 2);
+  const left = someProducts.slice(0, half);
+  const right = someProducts.slice(half);
 
+  return priceAscending(sortProductPriceA(left), sortProductPriceA(right));
+};
+
+function priceAscending(left, right) {
+  const sortedArray = [];
+
+  while (left.length && right.length) {
+    if (left[0].price < right[0].price) {
+     sortedArray.push(left.shift());
+    } else {
+      sortedArray.push(right.shift());
+    }
+  }
+  return [...sortedArray, ...left, ...right];
+}
 // sort products by price, descending order
 const sortProductPriceD = () => {};
 
