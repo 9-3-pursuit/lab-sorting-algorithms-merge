@@ -24,7 +24,7 @@ const {
 describe("Sorting Practice", () => {
   test("Sort numbers in ascending order", () => {
     expect(sortNumsA(someNums)).toStrictEqual([
-      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     ]);
   });
   test("Sort numbers in descending order", () => {
@@ -220,9 +220,10 @@ describe("Sorting Practice", () => {
         itemName: "Fur-Lined Cardboard Box",
         price: "♇♇3",
       },
-      { designedBy: "Fluffy", itemName: "Fur-Lined Track Pants", price: "♇♇5" },
+
       { designedBy: "Fluffy", itemName: "Fur-Lined Pillowcase", price: 6 },
       { designedBy: "Fluffy", itemName: "Fur-Lined Pillowcase", price: "6" },
+      { designedBy: "Fluffy", itemName: "Fur-Lined Track Pants", price: "♇♇5" },
       { designedBy: "Mittens", itemName: "Chewed Plastic Bag", price: 1.1 },
       {
         designedBy: "Mocha",

@@ -209,7 +209,7 @@ function sortCatDesign(left, right) {
     } else if (left[0].designedBy > right[0].designedBy) {
       sortedArray.push(right.shift());
     } else {
-      if (left[0].itemName < right[0].itemName) {
+      if (left[0].itemName.toLowerCase() < right[0].itemName.toLowerCase()) {
         sortedArray.push(left.shift());
       } else {
         sortedArray.push(right.shift());
@@ -221,11 +221,11 @@ function sortCatDesign(left, right) {
 
 function convertPrice(price) {
   if (typeof price === "string") {
-    return Number(price);
-  }
-  if (typeof price === "string" && price.includes("♇♇")) {
-    const lastNum = Number(price.slice(-1));
-    return lastNum * 10;
+    if (price.includes("♇♇")) {
+      return Number(price) * 10;
+    } else {
+      return Number(price);
+    }
   }
 }
 // sort catArt by price
@@ -244,19 +244,14 @@ const catArtSortByPriceA = (catArt) => {
 function sortCatPrice(left, right) {
   const sortedArray = [];
   while (left.length && right.length) {
+    console.log("test", left[0].price);
     if (convertPrice(left[0].price) < convertPrice(right[0].price)) {
       sortedArray.push(left.shift());
-    } else { //if (convertPrice(left[0].price) > convertPrice(right[0].price)) {
+    } else {
       sortedArray.push(right.shift());
-    } 
-    // else {
-    //   if (left[0].itemName < right[0].itemName) {
-    //     sortedArray.push(left.shift());
-    //   } else {
-    //     sortedArray.push(right.shift());
-    //   }
-    // }
+    }
   }
+
   return [...sortedArray, ...left, ...right];
 }
 
@@ -269,17 +264,17 @@ function sortCatPrice(left, right) {
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
 const mySortFunction = (someNums) => {
-  let temp
-  for(let i = 0; i < someNums.length; i++){
-    for(let j = i + 1; j < someNums.length; j++){
-      if(someNums[i] > someNums[j]){
-        temp = someNums[i]
-        someNums[i] = someNums[j]
-        someNums[j] = temp
+  let temp;
+  for (let i = 0; i < someNums.length; i++) {
+    for (let j = i + 1; j < someNums.length; j++) {
+      if (someNums[i] > someNums[j]) {
+        temp = someNums[i];
+        someNums[i] = someNums[j];
+        someNums[j] = temp;
       }
     }
   }
-  return someNums
+  return someNums;
 };
 
 module.exports = {
