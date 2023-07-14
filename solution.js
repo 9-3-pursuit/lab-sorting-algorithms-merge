@@ -40,10 +40,10 @@ const sortNumsD = (arr) => {
 const mergeDesc = (left, right) => {
   let sortedArr = [];
   while (left.length && right.length) {
-    if (left[0] < right[0]) {
-      sortedArr.push(right.shift());
-    } else {
+    if (left[0] > right[0]) {
       sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
     }
   }
   return [...sortedArr, ...left, ...right,];
@@ -61,18 +61,6 @@ const sortWordsA = (arr) => {
   const right = sortWordsA(arr.slice(half));
 
   return mergeAsc(left, right);
-};
-
-const mergeWordsAsc = (left, right) => {
-  let sortedArr = [];
-  while (left.length && right.length) {
-    if (left[0].toLowerCase() < right[0].toLowerCase()) {
-      sortedArr.push(left.shift());
-    } else {
-      sortedArr.push(right.shift());
-    }
-  }
-  return [...sortedArr, ...left, ...right];
 };
 
 // sort words in descending order case insensitive
@@ -150,10 +138,62 @@ const mergeProductPriceAsc = (left, right) => {
     } else {
       sortedArr.push(right.shift());
     }
-    console.log(sortedArr)
   }
   return [...sortedArr, ...left, ...right];
 };
+
+console.log(sortProductPriceA([
+  {
+    name: "fairy lights",
+    price: 5.99,
+    description: "festive holiday decoration",
+  },
+  {
+    name: "banana",
+    price: 0.99,
+    description: "full of potassium",
+  },
+  {
+    name: "egg separator",
+    price: 3.99,
+    description: "it separates yolks from whites",
+  },
+  {
+    name: "flag",
+    price: 5.99,
+    description: "catches the breeze",
+  },
+  {
+    name: "quark",
+    price: 0.01,
+    description: "Very small",
+  },
+  {
+    name: "turtleneck",
+    price: 19.99,
+    description: "available in black and slightly-darker black",
+  },
+  {
+    name: "mitt (leather)",
+    price: 15,
+    description: "regulation sized",
+  },
+  {
+    name: "nothing",
+    price: 10,
+    description: "Hey, if you pay us, we won't ask any questions.",
+  },
+  {
+    name: "violin",
+    price: 2000,
+    description: "Talk about a JS fiddle...",
+  },
+  {
+    name: "yoyo",
+    price: 1,
+    description: "We had to pull some strings to get this one in.",
+  },
+]));
 
 // sort products by price, descending order
 const sortProductPriceD = (arr) => {
