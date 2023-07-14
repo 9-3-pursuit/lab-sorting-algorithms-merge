@@ -128,7 +128,6 @@ const sortProductPriceA = (someProducts) => {
   const half = Math.floor(someProducts.length / 2);
   const left = someProducts.slice(0, half);
   const right = someProducts.slice(half);
-
   return priceAscending(sortProductPriceA(left), sortProductPriceA(right));
 };
 
@@ -137,24 +136,129 @@ function priceAscending(left, right) {
 
   while (left.length && right.length) {
     if (left[0].price < right[0].price) {
-     sortedArray.push(left.shift());
-    } else {
+      sortedArray.push(left.shift());
+    } else if (left[0].price > right[0].price) {
       sortedArray.push(right.shift());
+    } else {
+      if (left[0].name < right[0].name) {
+        sortedArray.push(left.shift());
+      } else {
+        sortedArray.push(right.shift());
+      }
     }
   }
   return [...sortedArray, ...left, ...right];
 }
+
 // sort products by price, descending order
-const sortProductPriceD = () => {};
+const sortProductPriceD = (someProducts) => {
+  if (someProducts.length <= 1) {
+    return someProducts;
+  }
+  const half = Math.floor(someProducts.length / 2);
+  const left = someProducts.slice(0, half);
+  const right = someProducts.slice(half);
+
+  return priceDescending(sortProductPriceD(left), sortProductPriceD(right));
+};
+
+function priceDescending(left, right) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (left[0].price > right[0].price) {
+      sortedArray.push(left.shift());
+    } else if (left[0].price < right[0].price) {
+      sortedArray.push(right.shift());
+    } else {
+      if (left[0].name < right[0].name) {
+        sortedArray.push(left.shift());
+      } else {
+        sortedArray.push(right.shift());
+      }
+    }
+  }
+  return [...sortedArray, ...left, ...right];
+}
 
 // sort products by price, then by name, ascending order
-const sortProducsPriceNameA = () => {};
+const sortProducsPriceNameA = (someProducts) => {
+  return sortProductPriceA(someProducts);
+};
 
 // sort catArt by designed by
-const catArtSortDesginedByA = () => {};
+const catArtSortDesginedByA = (catArt) => {
+  if (catArt.length <= 1) {
+    return catArt;
+  }
 
+  let half = Math.floor(catArt.length / 2);
+  let left = catArt.slice(0, half);
+  let right = catArt.slice(half);
+
+  return sortCatDesign(
+    catArtSortDesginedByA(left),
+    catArtSortDesginedByA(right)
+  );
+};
+
+function sortCatDesign(left, right) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (left[0].designedBy < right[0].designedBy) {
+      sortedArray.push(left.shift());
+    } else if (left[0].designedBy > right[0].designedBy) {
+      sortedArray.push(right.shift());
+    } else {
+      if (left[0].itemName < right[0].itemName) {
+        sortedArray.push(left.shift());
+      } else {
+        sortedArray.push(right.shift());
+      }
+    }
+  }
+  return [...sortedArray, ...left, ...right];
+}
+
+function convertPrice(price) {
+  if (typeof price === "string") {
+    return Number(price);
+  }
+  if (typeof price === "string" && price.includes("♇♇")) {
+    const lastNum = Number(price.slice(-1));
+    return lastNum * 10;
+  }
+}
 // sort catArt by price
-const catArtSortByPriceA = () => {};
+const catArtSortByPriceA = (catArt) => {
+  if (catArt.length <= 1) {
+    return catArt;
+  }
+
+  let half = Math.floor(catArt.length / 2);
+  let left = catArt.slice(0, half);
+  let right = catArt.slice(half);
+
+  return sortCatPrice(catArtSortByPriceA(left), catArtSortByPriceA(right));
+};
+
+function sortCatPrice(left, right) {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (convertPrice(left[0].price) < convertPrice(right[0].price)) {
+      sortedArray.push(left.shift());
+    } else { //if (convertPrice(left[0].price) > convertPrice(right[0].price)) {
+      sortedArray.push(right.shift());
+    } 
+    // else {
+    //   if (left[0].itemName < right[0].itemName) {
+    //     sortedArray.push(left.shift());
+    //   } else {
+    //     sortedArray.push(right.shift());
+    //   }
+    // }
+  }
+  return [...sortedArray, ...left, ...right];
+}
 
 // Create your own sort function
 // it should sort in ascending order
