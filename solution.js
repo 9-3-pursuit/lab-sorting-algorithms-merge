@@ -268,7 +268,19 @@ function sortCatPrice(left, right) {
 // or try to implement merge sort
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
-const mySortFunction = () => {};
+const mySortFunction = (someNums) => {
+  let temp
+  for(let i = 0; i < someNums.length; i++){
+    for(let j = i + 1; j < someNums.length; j++){
+      if(someNums[i] > someNums[j]){
+        temp = someNums[i]
+        someNums[i] = someNums[j]
+        someNums[j] = temp
+      }
+    }
+  }
+  return someNums
+};
 
 module.exports = {
   sortNumsA,
