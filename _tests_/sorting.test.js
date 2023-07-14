@@ -220,9 +220,9 @@ describe("Sorting Practice", () => {
         itemName: "Fur-Lined Cardboard Box",
         price: "♇♇3",
       },
-      { designedBy: "Fluffy", itemName: "Fur-Lined Track Pants", price: "♇♇5" },
       { designedBy: "Fluffy", itemName: "Fur-Lined Pillowcase", price: 6 },
       { designedBy: "Fluffy", itemName: "Fur-Lined Pillowcase", price: "6" },
+      { designedBy: "Fluffy", itemName: "Fur-Lined Track Pants", price: "♇♇5" },
       { designedBy: "Mittens", itemName: "Chewed Plastic Bag", price: 1.1 },
       {
         designedBy: "Mocha",
