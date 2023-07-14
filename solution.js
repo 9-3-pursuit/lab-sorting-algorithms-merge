@@ -1,25 +1,172 @@
 const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
 
 // sort numbers in ascending order
-const sortNumsA = () => {};
+const sortNumsA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  
+  const half = Math.floor(arr.length / 2);
+  const left = sortNumsA(arr.slice(0, half));
+  const right = sortNumsA(arr.slice(half));
+  return mergeAsc(left, right);
+};
+
+const mergeAsc = (left, right) => {
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
+    }
+  }
+  return [...sortedArr, ...left, ...right]
+}
 
 // sort numbers in descending order
-const sortNumsD = () => {};
+const sortNumsD = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortNumsD(arr.slice(0, half));
+  const right = sortNumsD(arr.slice(half));
+
+  return mergeDesc(left, right);
+};
+
+const mergeDesc = (left, right) => {
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      sortedArr.push(right.shift());
+    } else {
+      sortedArr.push(left.shift());
+    }
+  }
+  return [...sortedArr, ...left, ...right,];
+};
+
 
 // sort words in ascending order case sensitive
-const sortWordsA = () => {};
+const sortWordsA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortWordsA(arr.slice(0, half));
+  const right = sortWordsA(arr.slice(half));
+
+  return mergeAsc(left, right);
+};
+
+const mergeWordsAsc = (left, right) => {
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0].toLowerCase() < right[0].toLowerCase()) {
+      sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
+    }
+  }
+  return [...sortedArr, ...left, ...right];
+};
 
 // sort words in descending order case insensitive
-const sortWordsD = () => {};
+const sortWordsD = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortWordsD(arr.slice(0, half));
+  const right = sortWordsD(arr.slice(half));
+
+  return mergeWordsDesc(left, right);
+};
+
+const mergeWordsDesc = (left, right) => {
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0].toLowerCase() < right[0].toLowerCase()) {
+      sortedArr.push(right.shift());
+    } else {
+      sortedArr.push(left.shift());
+    }
+  }
+  return [...sortedArr, ...left, ...right];
+};
+
 
 // sort products by name, ascending order case insensitive
-const sortProductNamesA = () => {};
+const sortProductNamesA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortProductNamesA(arr.slice(0, half));
+  const right = sortProductNamesA(arr.slice(half));
+
+  return mergeProductNamesAsc(left, right);
+};
+
+const mergeProductNamesAsc = (left, right) => {
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0].name < right[0].name) {
+      sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
+    }
+  }
+  return [...sortedArr, ...left, ...right];
+};
+
+
 
 // sort products by price, ascending order
-const sortProductPriceA = () => {};
+const sortProductPriceA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortProductPriceA(arr.slice(0, half));
+  const right = sortProductPriceA(arr.slice(half));
+
+  return mergeProductPriceAsc(left, right);
+};
+
+const mergeProductPriceAsc = (left, right) => {
+  let sortedArr = [];
+
+  while (left.length && right.length) {
+    if (left[0].price < right[0].price) {
+      sortedArr.push(left.shift());
+    } else {
+      sortedArr.push(right.shift());
+    }
+    console.log(sortedArr)
+  }
+  return [...sortedArr, ...left, ...right];
+};
 
 // sort products by price, descending order
-const sortProductPriceD = () => {};
+const sortProductPriceD = (arr) => {
+   if (arr.length <= 1) {
+     return arr;
+   }
+
+   const half = Math.floor(arr.length / 2);
+   const left = sortProductPriceD(arr.slice(0, half));
+   const right = sortProductPriceD(arr.slice(half));
+
+   return mergeAsc(left, right);
+};
 
 // sort products by price, then by name, ascending order
 const sortProducsPriceNameA = () => {};
