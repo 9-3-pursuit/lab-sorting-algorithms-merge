@@ -4,7 +4,6 @@ const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
 const sortNumsA = (someNums) => {
   // return someNums.sort((a,b) => a-b)
   
-  console.log('test:', someNums)
 
   for (let i = 0; i < someNums.length; i++) {
     for (let j = 0; j < someNums.length; j++) {
@@ -15,7 +14,7 @@ const sortNumsA = (someNums) => {
       }
     }
   }
-    console.log('test2', someNums) 
+    
     return someNums
   
 };
@@ -107,24 +106,24 @@ const sortProductPriceA = (someProducts) => {
 
 
   for (let i = 0; i < someProducts.length; i++) {
-    let swapped = false;
+    let swapped = false
 
     for (let j = 0; j < someProducts.length - 1 - i; j++) {
       if (someProducts[j].price > someProducts[j + 1].price) {
-        let temporary = someProducts[j];
-        someProducts[j] = someProducts[j + 1];
-        someProducts[j + 1] = temporary;
+        let temporary = someProducts[j]
+        someProducts[j] = someProducts[j + 1]
+        someProducts[j + 1] = temporary
         swapped = true;
       }
     }
 
     if (!swapped) {
-      break;
+      break
     }
   }
 
-  console.log('some:', someProducts);
-  return someProducts;
+  console.log('some:', someProducts)
+  return someProducts
 };
 
 
@@ -132,22 +131,27 @@ const sortProductPriceA = (someProducts) => {
 
 // sort products by price, descending order
 const sortProductPriceD = (someProducts) => {
-  for (let i = 0; i < someProducts.length; i++) {
-    let swapped = false;
-    for (let j = i + 1; j < someProducts.length - i; j++) {
-      if (someProducts[j].price > someProducts[j - 1].price) {
-        let temporary = someProducts[j];
-        someProducts[j] = someProducts[j - 1];
-        someProducts[j - 1] = temporary;
-        swapped = true;
-      }
-    }
-    if (!swapped) {
-      break;
-    }
-  }
-  console.log('someProducts:', someProducts);
-  return someProducts;
+
+  // console.log('test:, someProducts')
+  // for (let i = 0; i < someProducts.length; i++) {
+  //   let swapped = false;
+  //   for (let j = i + 1; j < someProducts.length - 1 - i; j++) {
+  //     if (someProducts[j].price > someProducts[j - 1].price) {
+  //       // console.log('test2:',someProducts[j].price, someProducts[j - 1].price )
+  //       let temporary = someProducts[j]
+  //       someProducts[j] = someProducts[j - 1]
+  //       someProducts[j - 1] = temporary
+  //       swapped = true
+  //     }
+  //   }
+  //   if (!swapped) {
+  //     break
+  //   }
+  // }
+  // console.log('someProducts:', someProducts)
+  // return someProducts
+
+  return someProducts.sort((a,b) => b.price - a.price)
 };
   
 
@@ -196,23 +200,31 @@ const catArtSortDesginedByA = (catArt) => {
 
 // sort catArt by price
 const catArtSortByPriceA = (catArt) => {
-  for (let i = 0; i < catArt.length - 1; i++) {
-    let swapped = false;
+  for (let i = 0; i < catArt.length; i++) {
+    let swapped = false
     for (let j = 0; j < catArt.length - 1 - i; j++) {
-      if (catArt[j].price > catArt[j + 1].price) {
-        let temporary = catArt[j];
-        catArt[j] = catArt[j + 1];
-        catArt[j + 1] = temporary;
+      let priceA = parseFloat(catArt[j].price)
+      let priceB = parseFloat(catArt[j + 1].price)
+      if (!isNaN(priceA) && !isNaN(priceB) && priceA > priceB) {
+        let temporary = catArt[j]
+        catArt[j] = catArt[j + 1]
+        catArt[j + 1] = temporary
         swapped = true;
+      } else if (isNaN(priceA) && isNaN(priceB) && catArt[j].price.localeCompare(catArt[j + 1].price) === 1) {
+        let temporary = catArt[j]
+        catArt[j] = catArt[j + 1]
+        catArt[j + 1] = temporary
+        swapped = true
       }
     }
     if (!swapped) {
-      break;
+      break
     }
   }
 
-  return catArt;
+  return catArt
 };
+
 
 
 // Create your own sort function
@@ -223,8 +235,110 @@ const catArtSortByPriceA = (catArt) => {
 // or try to implement merge sort
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
-const mySortFunction = () => {
-  
+const mySortFunction = (someNums, someWords, order = 'ascending', casing = 'insensitive') => {
+  if (someNums && order) {
+    for (let i = 0; i < someNums.length; i++) {
+      let swapped = false
+      for (let j = 0; j < someNums.length - 1 - i; j++) {
+        if (someNums[j] > someNums[j + 1]) {
+          let temporary = someNums[j]
+          someNums[j] = someNums[j + 1]
+          someNums[j + 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  if (someNums && order === 'descending') {
+    for (let i = 0; i < someNums.length; i++) {
+      let swapped = false
+      for (let j = i + 1; j < someNums.length - 1 - i; j++) {
+        if (someNums[j] > someNums[j - 1]) {
+          let temporary = someNums[j]
+          someNums[j] = someNums[j - 1]
+          someNums[j - 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  if (someWords && order && casing) {
+    for (let i = 0; i < someWords.length; i++) {
+      let swapped = false
+      for (let j = 0; j < someWords.length - 1 - i; j++) {
+        if (someWords[j].toLowerCase() > someWords[j + 1].toLowerCase()) {
+          let temporary = someWords[j]
+          someWords[j] = someWords[j + 1]
+          someWords[j + 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  if (someWords && order && casing === 'sensitive') {
+    for (let i = 0; i < someWords.length; i++) {
+      let swapped = false;
+      for (let j = 0; j < someWords.length - 1 - i; j++) {
+        if (someWords[j] > someWords[j + 1]) {
+          let temporary = someWords[j]
+          someWords[j] = someWords[j + 1]
+          someWords[j + 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  if (someWords && order === 'descending' && casing) {
+    for (let i = 0; i < someWords.length; i++) {
+      let swapped = false;
+      for (let j = i + 1; j < someWords.length; j++) {
+        if (someWords[j].toLowerCase() > someWords[j - 1].toLowerCase()) {
+          let temporary = someWords[j]
+          someWords[j] = someWords[j - 1]
+          someWords[j - 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  if (someWords && order === 'descending' && casing === 'sensitive') {
+    for (let i = 0; i < someWords.length; i++) {
+      let swapped = false;
+      for (let j = i + 1; j < someWords.length; j++) {
+        if (someWords[j] > someWords[j - 1]) {
+          let temporary = someWords[j]
+          someWords[j] = someWords[j - 1]
+          someWords[j - 1] = temporary
+          swapped = true
+        }
+      }
+      if (!swapped) {
+        break
+      }
+    }
+  }
+
+  return someNums || someWords
 };
 
 module.exports = {
