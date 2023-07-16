@@ -59,8 +59,6 @@ const sortWordsA = (someWords) => {
 };
 
 // sort words in descending order case insensitive
-
-
 const sortWordsD = (someWords) => {
   // return someWords.sort((a,b) => b.toLowerCase().localeCompare(a.toLowerCase()))
   for (let i = 0; i < someWords.length - 1; i++) {
@@ -84,19 +82,14 @@ const sortWordsD = (someWords) => {
 // sort products by name, ascending order case insensitive
 const sortProductNamesA = (someProducts) => {
   for (let i = 0; i < someProducts.length; i++){
-    let swapped = false
     for (let j = 0; j < someProducts.length - 1 - i; j++){
       if (someProducts[j].name > someProducts[j + 1].name) {
         let temporary = someProducts[j]
         someProducts[j] = someProducts[j + 1]
         someProducts[j + 1] = temporary
-        swapped = true
       }
     }
 
-    if (!swapped) {
-      break
-    }
   }
   return someProducts
 };
@@ -106,20 +99,15 @@ const sortProductPriceA = (someProducts) => {
 
 
   for (let i = 0; i < someProducts.length; i++) {
-    let swapped = false
 
     for (let j = 0; j < someProducts.length - 1 - i; j++) {
       if (someProducts[j].price > someProducts[j + 1].price) {
         let temporary = someProducts[j]
         someProducts[j] = someProducts[j + 1]
         someProducts[j + 1] = temporary
-        swapped = true;
       }
     }
 
-    if (!swapped) {
-      break
-    }
   }
 
   console.log('some:', someProducts)
@@ -134,18 +122,13 @@ const sortProductPriceD = (someProducts) => {
 
   // console.log('test:, someProducts')
   // for (let i = 0; i < someProducts.length; i++) {
-  //   let swapped = false;
   //   for (let j = i + 1; j < someProducts.length - 1 - i; j++) {
   //     if (someProducts[j].price > someProducts[j - 1].price) {
   //       // console.log('test2:',someProducts[j].price, someProducts[j - 1].price )
   //       let temporary = someProducts[j]
   //       someProducts[j] = someProducts[j - 1]
   //       someProducts[j - 1] = temporary
-  //       swapped = true
   //     }
-  //   }
-  //   if (!swapped) {
-  //     break
   //   }
   // }
   // console.log('someProducts:', someProducts)
@@ -182,17 +165,12 @@ const sortProducsPriceNameA = (someProducts) => {
 // sort catArt by designed by
 const catArtSortDesginedByA = (catArt) => {
   for (let i = 0; i < catArt.length; i++){
-    let swapped = false
     for (let j = 0; j < catArt.length - 1 - i; j++){
       if (catArt[j].designedBy > catArt[j + 1].designedBy) {
         let temporary = catArt[j]
         catArt[j] = catArt[j + 1]
         catArt[j + 1] = temporary
-        swapped = true
       }
-    }
-    if (!swapped) {
-      break
     }
   }
   return catArt
@@ -203,7 +181,6 @@ const catArtSortByPriceA = (catArt) => {
 
   let copy = [...catArt]
   for (let i = 0; i < copy.length; i++) {
-    let swapped = false;
     for (let j = 0; j < copy.length - 1 - i; j++) {
       let priceA = convertPriceToDollars(copy[j].price)
       let priceB = convertPriceToDollars(copy[j + 1].price)
@@ -212,13 +189,9 @@ const catArtSortByPriceA = (catArt) => {
         let temporary = copy[j]
         copy[j] = copy[j + 1]
         copy[j + 1] = temporary
-        swapped = true
       }
     }
 
-    if (!swapped) {
-      break
-    }
   }
 
   console.log('Sorted Array:', copy)
@@ -256,102 +229,72 @@ const catArtSorted = catArtSortByPriceA(catArt);
 const mySortFunction = (someNums, someWords, order = 'ascending', casing = 'insensitive') => {
   if (someNums && order) {
     for (let i = 0; i < someNums.length; i++) {
-      let swapped = false
       for (let j = 0; j < someNums.length - 1 - i; j++) {
         if (someNums[j] > someNums[j + 1]) {
           let temporary = someNums[j]
           someNums[j] = someNums[j + 1]
           someNums[j + 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
 
   if (someNums && order === 'descending') {
     for (let i = 0; i < someNums.length; i++) {
-      let swapped = false
       for (let j = i + 1; j < someNums.length - 1 - i; j++) {
         if (someNums[j] > someNums[j - 1]) {
           let temporary = someNums[j]
           someNums[j] = someNums[j - 1]
           someNums[j - 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
 
   if (someWords && order && casing) {
     for (let i = 0; i < someWords.length; i++) {
-      let swapped = false
       for (let j = 0; j < someWords.length - 1 - i; j++) {
         if (someWords[j].toLowerCase() > someWords[j + 1].toLowerCase()) {
           let temporary = someWords[j]
           someWords[j] = someWords[j + 1]
           someWords[j + 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
 
   if (someWords && order && casing === 'sensitive') {
     for (let i = 0; i < someWords.length; i++) {
-      let swapped = false;
       for (let j = 0; j < someWords.length - 1 - i; j++) {
         if (someWords[j] > someWords[j + 1]) {
           let temporary = someWords[j]
           someWords[j] = someWords[j + 1]
           someWords[j + 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
 
   if (someWords && order === 'descending' && casing) {
     for (let i = 0; i < someWords.length; i++) {
-      let swapped = false;
       for (let j = i + 1; j < someWords.length; j++) {
         if (someWords[j].toLowerCase() > someWords[j - 1].toLowerCase()) {
           let temporary = someWords[j]
           someWords[j] = someWords[j - 1]
           someWords[j - 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
 
   if (someWords && order === 'descending' && casing === 'sensitive') {
     for (let i = 0; i < someWords.length; i++) {
-      let swapped = false;
       for (let j = i + 1; j < someWords.length; j++) {
         if (someWords[j] > someWords[j - 1]) {
           let temporary = someWords[j]
           someWords[j] = someWords[j - 1]
           someWords[j - 1] = temporary
-          swapped = true
         }
-      }
-      if (!swapped) {
-        break
       }
     }
   }
