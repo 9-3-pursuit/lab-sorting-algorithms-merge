@@ -145,7 +145,7 @@ console.log('test',sortProductPriceD(someProducts))
 
 
 // sort products by price, then by name, ascending order
-const sortProducsPriceNameA = (someProducts) => {
+const sortProductsPriceNameA = (someProducts) => {
   for (let i = 0; i < someProducts.length; i++) {
     for (let j = 0; j < someProducts.length - i - 1; j++) {
       if (someProducts[j].price > someProducts[j + 1].price ||
@@ -163,7 +163,7 @@ const sortProducsPriceNameA = (someProducts) => {
 
 
 // sort catArt by designed by
-const catArtSortDesginedByA = (catArt) => {
+const catArtSortDesignedByA = (catArt) => {
   for (let i = 0; i < catArt.length; i++){
     for (let j = 0; j < catArt.length - 1 - i; j++){
       if (catArt[j].designedBy > catArt[j + 1].designedBy) {
@@ -310,8 +310,8 @@ module.exports = {
   sortProductNamesA,
   sortProductPriceA,
   sortProductPriceD,
-  sortProducsPriceNameA,
-  catArtSortDesginedByA,
+  sortProductsPriceNameA,
+  catArtSortDesignedByA,
   catArtSortByPriceA,
   mySortFunction,
 };
