@@ -233,7 +233,7 @@ describe("Sorting Practice", () => {
       { designedBy: "Tortie", itemName: "Dug Up Houseplant", price: 4 },
     ]);
   });
-  test.only("Sort catArt by price", () => {
+  test("Sort catArt by price", () => {
     expect(catArtSortByPriceA(catArt)).toStrictEqual([
       { designedBy: "Mittens", itemName: "Chewed Plastic Bag", price: 1.1 },
       { designedBy: "Patches", itemName: "Tangled yarn", price: 2.02 },

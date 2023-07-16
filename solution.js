@@ -200,30 +200,48 @@ const catArtSortDesginedByA = (catArt) => {
 
 // sort catArt by price
 const catArtSortByPriceA = (catArt) => {
-  for (let i = 0; i < catArt.length; i++) {
-    let swapped = false
-    for (let j = 0; j < catArt.length - 1 - i; j++) {
-      let priceA = parseFloat(catArt[j].price)
-      let priceB = parseFloat(catArt[j + 1].price)
-      if (!isNaN(priceA) && !isNaN(priceB) && priceA > priceB) {
-        let temporary = catArt[j]
-        catArt[j] = catArt[j + 1]
-        catArt[j + 1] = temporary
-        swapped = true;
-      } else if (isNaN(priceA) && isNaN(priceB) && catArt[j].price.localeCompare(catArt[j + 1].price) === 1) {
-        let temporary = catArt[j]
-        catArt[j] = catArt[j + 1]
-        catArt[j + 1] = temporary
+
+  let copy = [...catArt]
+  for (let i = 0; i < copy.length; i++) {
+    let swapped = false;
+    for (let j = 0; j < copy.length - 1 - i; j++) {
+      let priceA = convertPriceToDollars(copy[j].price)
+      let priceB = convertPriceToDollars(copy[j + 1].price)
+
+      if (priceA > priceB) {
+        let temporary = copy[j]
+        copy[j] = copy[j + 1]
+        copy[j + 1] = temporary
         swapped = true
       }
     }
+
     if (!swapped) {
       break
     }
   }
 
-  return catArt
+  console.log('Sorted Array:', copy)
+  return copy
+}
+
+const convertPriceToDollars = (price) => {
+  if (typeof price === 'number') {
+    return price
+  } else if (typeof price === 'string') {
+    if (price.includes('♇♇')) {
+      let plutoCoinPrice = 10
+      let quantity = parseFloat(price.replace('♇♇', ''))
+      return quantity * plutoCoinPrice
+    } else {
+      return parseFloat(price)
+    }
+  } else {
+    return 0
+  }
 };
+
+const catArtSorted = catArtSortByPriceA(catArt);
 
 
 
