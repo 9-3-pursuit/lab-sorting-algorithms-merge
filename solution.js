@@ -260,7 +260,7 @@ const catArtSortByPriceA = (arr) => {
 const mergeCatArtByPrice = (left, right) => {
   const sortedArray = [];
   while (left.length && right.length) {
-    if (convertPlutoPrice(left[0].price) < convertPlutoPrice(right[0].price)) {
+    if (convertPlutoPrice(left[0].price) <= convertPlutoPrice(right[0].price)) {
       sortedArray.push(left.shift());
     } else {
       sortedArray.push(right.shift());
