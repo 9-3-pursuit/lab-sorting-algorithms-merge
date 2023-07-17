@@ -1,4 +1,4 @@
-const { catArt, someNums, someProducts, someWords } = require("./data/data.js");
+const { catArt, arr, someProducts, someWords } = require("./data/data.js");
 
 // sort numbers in ascending order
 const sortNumsA = (arr) => {
@@ -135,65 +135,19 @@ const mergeProductPriceAsc = (left, right) => {
   while (left.length && right.length) {
     if (left[0].price < right[0].price) {
       sortedArr.push(left.shift());
-    } else {
+    } else if (left[0].price > right[0].price) {
       sortedArr.push(right.shift());
+    } else {
+      if (left[0].name < right[0].name) {
+        sortedArr.push(left.shift());
+      } else {
+        sortedArr.push(right.shift());
+      }
     }
   }
   return [...sortedArr, ...left, ...right];
 };
 
-console.log(sortProductPriceA([
-  {
-    name: "fairy lights",
-    price: 5.99,
-    description: "festive holiday decoration",
-  },
-  {
-    name: "banana",
-    price: 0.99,
-    description: "full of potassium",
-  },
-  {
-    name: "egg separator",
-    price: 3.99,
-    description: "it separates yolks from whites",
-  },
-  {
-    name: "flag",
-    price: 5.99,
-    description: "catches the breeze",
-  },
-  {
-    name: "quark",
-    price: 0.01,
-    description: "Very small",
-  },
-  {
-    name: "turtleneck",
-    price: 19.99,
-    description: "available in black and slightly-darker black",
-  },
-  {
-    name: "mitt (leather)",
-    price: 15,
-    description: "regulation sized",
-  },
-  {
-    name: "nothing",
-    price: 10,
-    description: "Hey, if you pay us, we won't ask any questions.",
-  },
-  {
-    name: "violin",
-    price: 2000,
-    description: "Talk about a JS fiddle...",
-  },
-  {
-    name: "yoyo",
-    price: 1,
-    description: "We had to pull some strings to get this one in.",
-  },
-]));
 
 // sort products by price, descending order
 const sortProductPriceD = (arr) => {
@@ -205,17 +159,116 @@ const sortProductPriceD = (arr) => {
    const left = sortProductPriceD(arr.slice(0, half));
    const right = sortProductPriceD(arr.slice(half));
 
-   return mergeAsc(left, right);
+   return mergeProductPriceDesc(left, right);
+};
+
+const mergeProductPriceDesc = (left, right) => {
+  let sortedArr = [];
+
+  while (left.length && right.length) {
+    if (left[0].price > right[0].price) {
+      sortedArr.push(left.shift());
+    } else if (left[0].price < right[0].price) {
+      sortedArr.push(right.shift());
+    } else {
+      if (left[0].name < right[0].name) {
+        sortedArr.push(left.shift());
+      } else {
+        sortedArr.push(right.shift());
+      }
+    }
+  }
+  return [...sortedArr, ...left, ...right];
 };
 
 // sort products by price, then by name, ascending order
-const sortProducsPriceNameA = () => {};
+const sortProducsPriceNameA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = sortProductPriceA(arr.slice(0, half));
+  const right = sortProductPriceA(arr.slice(half));
+
+  return mergeProductPriceAsc(left, right);
+};
 
 // sort catArt by designed by
-const catArtSortDesginedByA = () => {};
+const catArtSortDesginedByA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = catArtSortDesginedByA(arr.slice(0, half));
+  const right = catArtSortDesginedByA(arr.slice(half));
+
+  return mergeArtByDesign(left, right);
+};
+
+const mergeArtByDesign = (left, right) => { 
+  let sortedArr = [];
+  while (left.length && right.length) {
+    if (left[0].designedBy < right[0].designedBy) { 
+      sortedArr.push(left.shift());
+    } else if (left[0].designedBy > right[0].designedBy) {
+      sortedArr.push(right.shift());
+    } else {
+      if (left[0].itemName.toLowerCase() < right[0].itemName.toLowerCase()) { 
+        sortedArr.push(left.shift());
+      } else if (left[0].itemName.toLowerCase() > right[0].itemName.toLowerCase()) {
+        sortedArr.push(right.shift());
+      } else {
+        if (left[0].price < right[0].price) {
+          sortedArr.push(left.shift());
+        } else {
+          sortedArr.push(right.shift());
+        }
+      }
+    }
+  }
+  return [...sortedArr, ...left, ...right];
+}
+
+
+// Convert price function
+const convertPlutoPrice = (input) => {
+  if (typeof input === 'number') return input;
+
+  if (input.slice(0, 2) !== '♇♇') return Number(input);
+  const num = Number(input.slice(2));
+  return num * 10;
+}
+
+
+
 
 // sort catArt by price
-const catArtSortByPriceA = () => {};
+const catArtSortByPriceA = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const half = Math.floor(arr.length / 2);
+  const left = catArtSortByPriceA(arr.slice(0, half));
+  const right = catArtSortByPriceA(arr.slice(half));
+
+  return mergeCatArtByPrice(left, right);
+};
+
+const mergeCatArtByPrice = (left, right) => {
+  const sortedArray = [];
+  while (left.length && right.length) {
+    if (convertPlutoPrice(left[0].price) < convertPlutoPrice(right[0].price)) {
+      sortedArray.push(left.shift());
+    } else {
+      sortedArray.push(right.shift());
+    }
+  }
+
+  return [...sortedArray, ...left, ...right];
+}
 
 // Create your own sort function
 // it should sort in ascending order
@@ -225,7 +278,19 @@ const catArtSortByPriceA = () => {};
 // or try to implement merge sort
 // or look up another common sort algorithm (i.e. quicksort, ) and try your own implementation
 // Bonus add another argument that would allow the function to be used for ascending or descending order
-const mySortFunction = () => {};
+const mySortFunction = (arr) => {
+   let temp;
+   for (let i = 0; i < arr.length; i++) {
+     for (let j = i + 1; j < arr.length; j++) {
+       if (arr[i] > arr[j]) {
+         temp = arr[i];
+         arr[i] = arr[j];
+         arr[j] = temp;
+       }
+     }
+   }
+   return arr;
+};
 
 module.exports = {
   sortNumsA,
